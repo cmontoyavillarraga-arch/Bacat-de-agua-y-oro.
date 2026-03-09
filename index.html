@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bacatá de agua y oro</title>
+    <meta
+      name="description"
+      content="Proyecto multimedia que integra contenido poético con animación en p5.js, video sintético generado por IA y diseño web responsivo para una experiencia inmersiva."
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+    <link rel="icon" type="image/png" href="assets/icon.png" />
+<link rel="stylesheet" href="style.css" />
+
+  </head>
+
+  <body>
+    <!-- ===== BOTÓN MÚSICA ===== -->
+   <button id="music-btn" class="music-btn">♪</button>
+<audio id="music" loop></audio>
+
+  <!-- ===== TÍTULO ===== -->
+<section class="pagina-titulo" id="pagina-titulo" data-audio="assets/au1.mp3">
+  <button id="openModal" class="info-btn">i</button>
+
+  <video src="assets/act1.mp4" autoplay muted loop playsinline></video>
+
+  <div id="titulo-wrapper" aria-hidden="false">
+    <h1 id="titulo-humanidad"><a href="#historia">BACATÁ DE AGUA Y ORO</a></h1>
+  </div>
+
+  <div class="scroll-down" aria-hidden="true"></div>
+</section>
+
+    <!-- ===== HISTORIA ===== -->
+    <div class="scroll-container" id="historia">
+      <!-- ACT 2-->
+  <section class="section" data-audio="assets/au2.mp3">
+    <video src="assets/act2.mp4" autoplay muted loop playsinline></video>
+  </section>
+
+  <!-- PÁRRAFO 3 -->
+  <section class="section" data-audio="assets/au3.mp3">
+    <video src="assets/act3.mp4" autoplay muted loop playsinline></video>
+    <div class="abajo">
+      La hoja abre el camino.
+    </div>
+  </section>
+
+  <!-- PÁRRAFO 4 -->
+  <section class="section" data-audio="assets/au4.mp3">
+    <video src="assets/act4.mp4" autoplay muted loop playsinline></video>
+  </section>
+
+  <!-- PÁRRAFO 5 -->
+  <section class="section" data-audio="assets/au5.mp3">
+    <video src="assets/act5.mp4" autoplay muted loop playsinline></video>
+    <div class="abajo">
+      Cuando se rompe el equilibrio…
+    </div>
+  </section>
+
+  <!-- PÁRRAFO 6 -->
+  <section class="section" data-audio="assets/au6.mp3">
+    <video src="assets/act6.mp4" autoplay muted loop playsinline></video>
+  </section>
+
+  <!-- PÁRRAFO 7 boton ofrenda-->
+  <section class="section decision-section" id="decision" data-audio="assets/au7.mp3">
+    <video src="assets/act7.MOV" autoplay muted loop playsinline></video>
+
+    <div class="decision-overlay">
+      <h2 class="decision-title">¿Le ofrendas tu figura a Bachué… o te la quedas?</h2>
+
+      <div class="decision-buttons">
+        <button id="btnOfrendar">Ofrendarla</button>
+        <button id="btnQuedarsela">Quedársela</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÁRRAFO 8 se queda -->
+  <section class="section hidden-section" id="finalQuedarsela" data-audio="assets/au8.mp3">
+    <video src="assets/act8.mp4" autoplay muted loop playsinline></video>
+    <div class="abajo">
+      El oro vuelve al agua.<br>
+      El equilibrio vuelve con él.
+    </div>
+  </section>
+
+  <!-- PÁRRAFO 9 ofrenda-->
+  <section class="section hidden-section" id="finalOfrenda" data-audio="assets/au9.mp3">
+    <video src="assets/act9.MOV" autoplay muted loop playsinline></video>
+    <div class="abajo">
+      Para ti es oro.<br>
+      Para el pueblo, era equilibrio.
+    </div>
+  </section>
+
+    <!-- ===== CRÉDITOS ===== -->
+    <div id="creditsModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2>¿Quiénes hicieron posible esta experiencia?</h2>
+        <div class="creditos-grid">
+          <div class="persona">
+            <h3>Catalina Montoya</h3>
+            <p>Programación</p>
+          </div>
+          <div class="persona">
+            <h3>Danna Benitez</h3>
+            <p>Diseño gráfico</p>
+          </div>
+          <div class="persona">
+            <h3>Daniela Vittoria</h3>
+            <p>Diseño gráfico</p>
+          </div>
+          <div class="persona">
+            <h3>Valentina Molina</h3>
+            <p>Storytelling</p>
+          </div>
+          <div class="proyecto-link">
+  <p>Sigue el proyecto:</p>
+  <a href="https://www.instagram.com/bacatadeaguayoro?utm_source=qr&igsh=MTU5OXBhcnE5eGd0ZA%3D%3D" target="_blank">
+    @bacatadeaguayoro
+  </a>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== INICIALIZACIÓN P5, MODAL Y MÚSICA ===== -->
+ <script defer>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Modal créditos
+    const modal = document.getElementById("creditsModal");
+    const openBtn = document.getElementById("openModal");
+    const closeBtn = document.getElementById("closeModal");
+
+    openBtn.onclick = () => (modal.style.display = "block");
+    closeBtn.onclick = () => (modal.style.display = "none");
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+
+  });
+</script>
+
+    <!-- ===== SCROLL SEAMLESS ===== -->
+    <script src="overlay-scroll.js" defer></script>
+
+    <!-- ===== PATCH VISIBILIDAD TÍTULO ===== -->
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        const elems = [
+          document.getElementById("titulo-wrapper"),
+          document.getElementById("titulo-humanidad"),
+          document.getElementById("subtitulo-humanidad"),
+        ].filter(Boolean);
+
+        elems.forEach((el) => {
+          el.style.display = "block";
+          el.style.opacity = "1";
+          el.style.visibility = "visible";
+          el.style.pointerEvents = "";
+          el.classList.remove("hidden", "invisible", "fade-out");
+        });
+      });
+    </script>
+    <div id="seamlessOverlay" aria-hidden="true"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
